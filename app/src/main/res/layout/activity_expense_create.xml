@@ -7,7 +7,7 @@
     tools:context=".ExpenseInfoActivity">
 
     <TextView
-        android:id="@+id/income_create_time_textview"
+        android:id="@+id/expense_create_time_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/expenditure"
+        android:id="@+id/expense_create_expense_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
@@ -33,10 +33,23 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_create_time_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/expense_create_time_data" />
+
+    <EditText
+        android:id="@+id/expense_create_expense_data"
+        android:layout_width="223dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="19dp"
+        android:text="60"
+        android:textAlignment="center"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expense_create_expense_text" />
 
     <TextView
-        android:id="@+id/describe"
+        android:id="@+id/expense_create_describe_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="157dp"
@@ -47,53 +60,43 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/expense_create_expense_data" />
 
-    <TextView
-        android:id="@+id/project"
+    <EditText
+        android:id="@+id/expense_create_describe_data"
         android:layout_width="238dp"
         android:layout_height="284dp"
         android:layout_marginStart="86dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="87dp"
+        android:gravity="top|left"
+        android:inputType="textMultiLine|text"
         android:text="買早餐"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/describe" />
+        app:layout_constraintTop_toBottomOf="@+id/expense_create_describe_text" />
 
     <ImageView
-        android:id="@+id/news"
+        android:id="@+id/expense_create_add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="156dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/project"
-        app:srcCompat="@drawable/btn_new" />
+        app:layout_constraintTop_toBottomOf="@+id/expense_create_describe_data"
+        app:srcCompat="@drawable/create_btn" />
 
     <ImageView
-        android:id="@+id/back"
+        android:id="@+id/expense_create_back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/btnback" />
+        app:srcCompat="@drawable/back_btn" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="223dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="19dp"
-        android:text="60"
-        android:textAlignment="center"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/icm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
