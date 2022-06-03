@@ -6,20 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".IncomeInfoActivity">
 
-    <TextView
+    <EditText
         android:id="@+id/income_create_time_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="35dp"
-        android:text="2022年04月23日"
+        android:hint="請輸入時間"
+        android:inputType="datetime"
         android:textColor="#000000"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2022/4/23" />
 
     <TextView
         android:id="@+id/income_create_income_text"
@@ -41,13 +43,14 @@
         android:layout_height="57dp"
         android:layout_marginStart="92dp"
         android:layout_marginTop="16dp"
+        android:hint="請輸入金額"
         android:inputType="number"
-        android:text="2000"
         android:textAlignment="center"
         android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_create_income_text" />
+        app:layout_constraintTop_toBottomOf="@+id/income_create_income_text"
+        tools:text="2000" />
 
     <TextView
         android:id="@+id/income_create_describe_text"
@@ -71,30 +74,35 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="87dp"
         android:gravity="top|left"
+        android:hint="請輸入此項目的描述"
         android:inputType="text"
-        android:text="中樂透"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_create_describe_text" />
+        app:layout_constraintTop_toBottomOf="@+id/income_create_describe_text"
+        tools:text="中樂透" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/income_create_add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="156dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="新增按鈕"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_create_describe_data"
         app:srcCompat="@drawable/create_btn" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/income_create_back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="返回按鈕"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/back_btn" />
