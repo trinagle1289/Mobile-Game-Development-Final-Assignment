@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IncomeInfoActivity">
+    tools:context=".AddExpenseActivity">
 
     <EditText
-        android:id="@+id/income_create_time_data"
+        android:id="@+id/expense_create_time_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="35dp"
-        android:hint="請輸入時間"
-        android:inputType="datetime"
+        android:hint="請輸入日期"
+        android:inputType="date"
         android:textColor="#000000"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,36 +24,36 @@
         tools:text="2022/4/23" />
 
     <TextView
-        android:id="@+id/income_create_income_text"
+        android:id="@+id/expense_create_expense_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="177dp"
-        android:text="收入金額"
+        android:text="支出金額"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_create_time_data" />
+        app:layout_constraintTop_toBottomOf="@+id/expense_create_time_data" />
 
     <EditText
-        android:id="@+id/income_create_income_data"
+        android:id="@+id/expense_create_expense_data"
         android:layout_width="223dp"
         android:layout_height="57dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="19dp"
         android:hint="請輸入金額"
         android:inputType="number"
         android:textAlignment="center"
         android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_create_income_text"
-        tools:text="2000" />
+        app:layout_constraintTop_toBottomOf="@+id/expense_create_expense_text"
+        tools:text="60" />
 
     <TextView
-        android:id="@+id/income_create_describe_text"
+        android:id="@+id/expense_create_describe_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="157dp"
@@ -64,10 +64,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_create_income_data" />
+        app:layout_constraintTop_toBottomOf="@+id/expense_create_expense_data" />
 
     <EditText
-        android:id="@+id/income_create_describe_data"
+        android:id="@+id/expense_create_describe_data"
         android:layout_width="238dp"
         android:layout_height="284dp"
         android:layout_marginStart="86dp"
@@ -75,32 +75,31 @@
         android:layout_marginEnd="87dp"
         android:gravity="top|left"
         android:hint="請輸入此項目的描述"
-        android:inputType="text"
+        android:inputType="textMultiLine|text"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_create_describe_text"
-        tools:text="中樂透" />
+        app:layout_constraintTop_toBottomOf="@+id/expense_create_describe_text"
+        tools:text="買早餐" />
 
     <ImageButton
-        android:id="@+id/income_create_add_btn"
+        android:id="@+id/expense_create_add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="144dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="156dp"
         android:backgroundTint="@color/white"
-        android:contentDescription="新增按鈕"
+        android:contentDescription="新增項目按鈕"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/create_btn" />
 
     <ImageButton
-        android:id="@+id/income_create_back_btn"
+        android:id="@+id/expense_create_back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="48dp"
         android:backgroundTint="@color/white"
         android:contentDescription="返回按鈕"
         app:layout_constraintBottom_toBottomOf="parent"

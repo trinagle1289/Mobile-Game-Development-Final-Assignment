@@ -9,6 +9,7 @@ import android.widget.TextView
 // 主介面
 class MainActivity : AppCompatActivity() {
 
+    // UI 變數
     lateinit var tvBalance: TextView // 餘額文字
     lateinit var tvIncome: TextView // 收入金額文字
     lateinit var tvExpense: TextView // 支出金額文字
@@ -25,16 +26,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 初始化參數
+        // 初始化
         tvBalance = findViewById(R.id.main_balance_data_text)
         tvIncome = findViewById(R.id.main_income_data_text)
         tvExpense = findViewById(R.id.main_expense_data_text)
-
         btnIncome = findViewById(R.id.main_income_btn)
         btnExpense = findViewById(R.id.main_expense_btn)
-
         setView()
         setButton()
+
     }
 
     // 設定畫面資料
@@ -47,12 +47,12 @@ class MainActivity : AppCompatActivity() {
     // 設定按鈕功能
     private fun setButton() {
         btnIncome.setOnClickListener {
-            var it: Intent = Intent(this, IncomeInfoActivity::class.java)
+            var it: Intent = Intent(this, IncomeListActivity::class.java)
             startActivity(it)
         }
 
         btnExpense.setOnClickListener {
-            var it: Intent = Intent(this, ExpenseInfoActivity::class.java)
+            var it: Intent = Intent(this, ExpenseListActivity::class.java)
             startActivity(it)
         }
     }
