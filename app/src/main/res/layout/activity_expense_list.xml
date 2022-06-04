@@ -21,10 +21,10 @@
         android:id="@+id/expanse_list_item_list"
         android:layout_width="292dp"
         android:layout_height="549dp"
-        android:layout_marginEnd="60dp"
         android:layout_marginBottom="76dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/expanse_list_back_btn"
