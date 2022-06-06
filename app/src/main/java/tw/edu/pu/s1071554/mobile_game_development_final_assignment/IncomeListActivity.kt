@@ -3,6 +3,7 @@ package tw.edu.pu.s1071554.mobile_game_development_final_assignment
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 
@@ -17,6 +18,7 @@ class IncomeListActivity : AppCompatActivity() {
     lateinit var list: TextView
     lateinit var dbhelp: DBHelper
     lateinit var fdata: ArrayList<FinancialData>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +42,13 @@ class IncomeListActivity : AppCompatActivity() {
         list.text = ""
         fdata = dbhelp.showAllIncome()
 
+        var tstr: String = ""
         for (d in fdata) {
-            list.text = list.text.toString() + d.message + "\n"
+            tstr += d.message + "\n"
+            Log.v("CCC", "ID:\n" + d.id + "amount:\n" + d.amount + "message: " + d.message)
         }
+        list.setText(tstr)
+
     }
 
     // 設定按鈕功能
