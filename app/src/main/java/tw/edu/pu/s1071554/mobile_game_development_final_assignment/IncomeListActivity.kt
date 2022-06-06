@@ -44,8 +44,7 @@ class IncomeListActivity : AppCompatActivity() {
 
         var tstr: String = ""
         for (d in fdata) {
-            tstr += d.message + "\n"
-            Log.v("CCC", "ID:\n" + d.id + "amount:\n" + d.amount + "message: " + d.message)
+            tstr += "日期：" + d.time + "| 金額：" + d.amount + "\n描述：" + d.message + "\n"
         }
         list.setText(tstr)
 

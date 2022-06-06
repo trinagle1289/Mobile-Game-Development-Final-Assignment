@@ -106,7 +106,7 @@ class DBHelper(
         var db = writableDatabase
 
         var sqlstr: String =
-            "INSERT INTO ${dbName}(time, amount, message) VALUES ( ${finData.time}, ${finData.amount}, ${finData.message})"
+            "INSERT INTO $dbName (time, amount, message) VALUES ( ${finData.time}, ${finData.amount}, ${finData.message})"
 
         db.execSQL(sqlstr)
     }
