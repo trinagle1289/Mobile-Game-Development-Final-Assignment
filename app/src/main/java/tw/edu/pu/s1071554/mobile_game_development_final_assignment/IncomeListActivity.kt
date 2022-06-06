@@ -14,6 +14,10 @@ class IncomeListActivity : AppCompatActivity() {
     lateinit var btAdd: ImageButton // 新增名單
     lateinit var btBack: ImageButton // 返回主頁面
 
+    lateinit var list: TextView
+    lateinit var dbhelp: DBHelper
+    lateinit var fdata: ArrayList<FinancialData>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_income_list)
@@ -22,6 +26,10 @@ class IncomeListActivity : AppCompatActivity() {
         tvTitle = findViewById(R.id.income_list_title_text)
         btAdd = findViewById(R.id.income_list_create_item_btn)
         btBack = findViewById(R.id.income_list_back_gtn)
+        list = findViewById(R.id.income_list_item_list)
+
+        dbhelp = DBHelper(this)
+        fdata = ArrayList<FinancialData>()
         setView()
         setButton()
 
@@ -29,7 +37,12 @@ class IncomeListActivity : AppCompatActivity() {
 
     // 設定畫面資料
     private fun setView() {
+        list.text = ""
+        fdata = dbhelp.showAllIncome()
 
+        for (d in fdata) {
+            list.text = list.text.toString() + d.message + "\n"
+        }
     }
 
     // 設定按鈕功能
