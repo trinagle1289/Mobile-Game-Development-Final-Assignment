@@ -35,12 +35,12 @@ class IncomeListActivity : AppCompatActivity() {
     // 設定按鈕功能
     private fun setButton() {
         btCreateItem.setOnClickListener {
-            var it: Intent = Intent(this, AddIncomeActivity::class.java)
+            var it = Intent(this, AddIncomeActivity::class.java)
             startActivity(it)
         }
 
         btBack.setOnClickListener {
-            var it: Intent = Intent(this, MainActivity::class.java)
+            var it = Intent(this, MainActivity::class.java)
             startActivity(it)
         }
     }

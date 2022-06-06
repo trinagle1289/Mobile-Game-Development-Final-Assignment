@@ -44,7 +44,7 @@ class AddIncomeActivity : AppCompatActivity() {
         }
 
         btBack.setOnClickListener {
-            var it: Intent = Intent(this, IncomeListActivity::class.java)
+            var it = Intent(this, IncomeListActivity::class.java)
             startActivity(it)
         }
     }

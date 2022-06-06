@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobileGameDevelopmentFinalAssignment">
         <activity
+            android:name=".ExpenseModifyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IncomeModifyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ExpenseListActivity"
             android:exported="false" />
         <activity

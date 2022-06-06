@@ -47,12 +47,12 @@ class MainActivity : AppCompatActivity() {
     // 設定按鈕功能
     private fun setButton() {
         btnIncome.setOnClickListener {
-            var it: Intent = Intent(this, IncomeListActivity::class.java)
+            var it = Intent(this, IncomeListActivity::class.java)
             startActivity(it)
         }
 
         btnExpense.setOnClickListener {
-            var it: Intent = Intent(this, ExpenseListActivity::class.java)
+            var it = Intent(this, ExpenseListActivity::class.java)
             startActivity(it)
         }
     }

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IncomeModifyActivity">
+
+    <EditText
+        android:id="@+id/income_modify_time_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="35dp"
+        android:hint="請輸入日期"
+        android:inputType="date"
+        android:text="2022年04月23日"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/income_modify_expense_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="177dp"
+        android:text="收入金額"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/income_modify_time_data" />
+
+    <EditText
+        android:id="@+id/income_modify_expense_data"
+        android:layout_width="223dp"
+        android:layout_height="57dp"
+        android:hint="請輸入金額"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/income_modify_expense_text"
+        tools:text="60" />
+
+    <TextView
+        android:id="@+id/income_modify_describe_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="157dp"
+        android:layout_marginEnd="158dp"
+        android:text="詳細描述"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/income_modify_expense_data" />
+
+    <EditText
+        android:id="@+id/income_modify_project"
+        android:layout_width="238dp"
+        android:layout_height="284dp"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="87dp"
+        android:gravity="top|left"
+        android:hint="請輸入此項目的描述"
+        android:inputType="textMultiLine|text"
+        android:text="買早餐"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/income_modify_describe_text" />
+
+    <ImageButton
+        android:id="@+id/income_modify_back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="24dp"
+        android:background="#FFFFFF"
+        android:contentDescription="返回按鈕"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/back_btn" />
+
+    <ImageButton
+        android:id="@+id/income_modify_del_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="72dp"
+        android:background="#FFFFFF"
+        android:contentDescription="刪除按鈕"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/delete_btn" />
+
+    <ImageButton
+        android:id="@+id/income_modify_modify_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:layout_marginBottom="72dp"
+        android:background="#FFFFFF"
+        android:contentDescription="修改按鈕"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/income_modify_del_btn"
+        app:layout_constraintHorizontal_bias="0.359"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/modify_btn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
