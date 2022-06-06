@@ -3,7 +3,6 @@ package tw.edu.pu.s1071554.mobile_game_development_final_assignment
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 
@@ -36,7 +35,7 @@ class ExpenseListActivity : AppCompatActivity() {
     // 設定按鈕功能
     private fun setButton() {
         btCreateItem.setOnClickListener {
-            var it: Intent = Intent(this, AddExpenseActivity::class.java)
+            var it: Intent = Intent(this, ExpenseAddActivity::class.java)
             startActivity(it)
         }
 

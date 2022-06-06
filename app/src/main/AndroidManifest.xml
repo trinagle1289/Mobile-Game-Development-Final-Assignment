@@ -22,10 +22,10 @@
             android:name=".IncomeListActivity"
             android:exported="false" />
         <activity
-            android:name=".AddExpenseActivity"
+            android:name=".ExpenseAddActivity"
             android:exported="false" />
         <activity
-            android:name=".AddIncomeActivity"
+            android:name=".IncomeAddActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

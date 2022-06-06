@@ -6,12 +6,11 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
 
-// 新增收入界面
-class AddIncomeActivity : AppCompatActivity() {
+// 新增支出界面
+class ExpenseAddActivity : AppCompatActivity() {
 
-    // UI 變數
     lateinit var etTime: EditText // 時間文字
-    lateinit var etIncome: EditText // 輸入收入金額
+    lateinit var etExpense: EditText // 輸入支出金額
     lateinit var etDescribe: EditText // 輸入描述文字
 
     lateinit var btAdd: ImageButton // 新增按鈕
@@ -19,32 +18,34 @@ class AddIncomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_income_add)
+        setContentView(R.layout.activity_expense_add)
 
-        // 初始化參數
-        etTime = findViewById(R.id.income_create_time_data)
-        etIncome = findViewById(R.id.income_create_income_data)
-        etDescribe = findViewById(R.id.income_create_describe_data)
-        btAdd = findViewById(R.id.income_create_add_btn)
-        btBack = findViewById(R.id.income_create_back_btn)
+        // 初始化
+        etTime = findViewById(R.id.expense_create_time_data)
+        etExpense = findViewById(R.id.expense_create_expense_data)
+        etDescribe = findViewById(R.id.expense_create_describe_data)
+        btAdd = findViewById(R.id.expense_create_add_btn)
+        btBack = findViewById(R.id.expense_create_back_btn)
         setView()
         setButton()
 
     }
 
+    // 設定畫面資料
     private fun setView() {
         etTime.text.clear()
-        etIncome.text.clear()
+        etExpense.text.clear()
         etDescribe.text.clear()
     }
 
+    // 設定按鈕功能
     private fun setButton() {
         btAdd.setOnClickListener {
 
         }
 
         btBack.setOnClickListener {
-            var it = Intent(this, IncomeListActivity::class.java)
+            var it: Intent = Intent(this, ExpenseListActivity::class.java)
             startActivity(it)
         }
     }

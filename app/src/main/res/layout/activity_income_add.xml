@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddIncomeActivity">
+    tools:context=".IncomeAddActivity">
 
     <EditText
         android:id="@+id/income_create_time_data"
