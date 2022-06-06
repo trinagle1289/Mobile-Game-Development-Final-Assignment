@@ -55,7 +55,7 @@ class IncomeAddActivity : AppCompatActivity() {
             var data = FinancialData(
                 0,
                 etTime.text.toString(),
-                Integer.valueOf(etIncome.text.toString()),
+                etIncome.text.toString(),
                 etDescribe.text.toString()
             )
             try {

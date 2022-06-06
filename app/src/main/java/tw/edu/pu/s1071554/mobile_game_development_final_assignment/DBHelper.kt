@@ -25,7 +25,7 @@ class DBHelper(
             "CREATE TABLE IF NOT EXISTS $incomeTable (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "time TEXT," +
-                    "amount INTEGER," +
+                    "amount TEXT," +
                     "message TEXT)"
         )
 
@@ -33,7 +33,7 @@ class DBHelper(
             "CREATE TABLE IF NOT EXISTS $expenseTable (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "time TEXT," +
-                    "amount INTEGER," +
+                    "amount TEXT," +
                     "message TEXT)"
         )
 
@@ -81,7 +81,7 @@ class DBHelper(
             var time = c1.getString(timeCol)
 
             var amountCol = c1.getColumnIndex("amount")
-            var amount = c1.getInt(amountCol)
+            var amount = c1.getString(amountCol)
 
             var messageCol = c1.getColumnIndex("message")
             var message = c1.getString(messageCol)
