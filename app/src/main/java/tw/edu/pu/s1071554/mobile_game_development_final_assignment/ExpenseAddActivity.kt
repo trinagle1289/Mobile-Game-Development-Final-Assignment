@@ -9,6 +9,7 @@ import android.widget.ImageButton
 // 新增支出界面
 class ExpenseAddActivity : AppCompatActivity() {
 
+    // UI 變數
     lateinit var etTime: EditText // 時間文字
     lateinit var etExpense: EditText // 輸入支出金額
     lateinit var etDescribe: EditText // 輸入描述文字
@@ -41,12 +42,11 @@ class ExpenseAddActivity : AppCompatActivity() {
     // 設定按鈕功能
     private fun setButton() {
         btAdd.setOnClickListener {
-
+            finish()
         }
 
         btBack.setOnClickListener {
-            var it: Intent = Intent(this, ExpenseListActivity::class.java)
-            startActivity(it)
+            finish()
         }
     }
 

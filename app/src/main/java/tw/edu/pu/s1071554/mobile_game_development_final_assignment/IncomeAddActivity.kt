@@ -32,20 +32,21 @@ class IncomeAddActivity : AppCompatActivity() {
 
     }
 
+    // 設定畫面資料
     private fun setView() {
         etTime.text.clear()
         etIncome.text.clear()
         etDescribe.text.clear()
     }
 
+    // 設定按鈕功能
     private fun setButton() {
         btAdd.setOnClickListener {
-
+            finish()
         }
 
         btBack.setOnClickListener {
-            var it = Intent(this, IncomeListActivity::class.java)
-            startActivity(it)
+            finish()
         }
     }
 
