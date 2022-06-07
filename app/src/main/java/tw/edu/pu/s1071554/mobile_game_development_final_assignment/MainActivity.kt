@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
     // 設定畫面資料
     private fun setView() {
         tvBalance.text = balance.toString()

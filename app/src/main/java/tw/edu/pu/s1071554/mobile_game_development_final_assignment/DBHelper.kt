@@ -18,7 +18,7 @@ class DBHelper(
     // CREATE TABLE IF NOT EXISTS fd_model  表示如果不存在 fd_model 則建立資料表
     // id INTEGER PRIMARY KEY AUTOINCREMENT 表示設定 id 為 整數 並且數值則會自動增量
     // time TEXT                            表示設定 time 為 文字格式(TEXT)
-    // amount INTEGER                       表示設定 amount 為 整數
+    // amount INTEGER                       表示設定 amount 為 文字格式(TEXT)
     // message TEXT                         表示設定 message 為 文字格式(TEXT)
     override fun onCreate(p0: SQLiteDatabase?) {
         p0?.execSQL(
@@ -106,7 +106,7 @@ class DBHelper(
         var db = writableDatabase
 
         var sqlstr: String =
-            "INSERT INTO $dbName (time, amount, message) VALUES ( ${finData.time}, ${finData.amount}, ${finData.message})"
+            "INSERT INTO $dbName (time, amount, message) VALUES ( '${finData.time}', '${finData.amount}', '${finData.message}')"
 
         db.execSQL(sqlstr)
     }
