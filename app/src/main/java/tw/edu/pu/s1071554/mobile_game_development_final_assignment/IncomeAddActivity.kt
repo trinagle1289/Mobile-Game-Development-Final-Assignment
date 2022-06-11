@@ -41,7 +41,7 @@ class IncomeAddActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
                 val time = etTime.text.toString()
-                val amount = etIncome.text.toString()
+                val amount = etIncome.text.toString().toInt()
                 val description = etDescribe.text.toString()
                 if (edit)
                     replyIntent.putExtra(EXTRA_UPDATE, EXTRA_UPDATE)

@@ -14,11 +14,11 @@ interface FinancialDataDAO {
     fun loadAllExpenseData(): Flow<List<FinancialData>>
 
     // 取得資料
-    @Query("SELECT * FROM financial_data WHERE uid=:fid")
-    fun loadData(fid: Int): Flow<List<FinancialData>>
+//    @Query("SELECT * FROM financial_data WHERE UID = uid")
+//    fun loadData(uid: Int): Flow<List<FinancialData>>
 
     // 導入資料
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert
     suspend fun insertData(data: FinancialData)
 
     // 刪除資料
