@@ -2,7 +2,6 @@ package tw.edu.pu.s1071554.mobile_game_development_final_assignment.database
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-import tw.edu.pu.s1071554.mobile_game_development_final_assignment.database.FinancialData
 
 @Dao
 interface FinancialDataDAO {
@@ -15,7 +14,7 @@ interface FinancialDataDAO {
     fun loadAllExpenseData(): Flow<List<FinancialData>>
 
     // 取得資料
-    @Query("SELECT * FROM financial_data WHERE UID=:fid")
+    @Query("SELECT * FROM financial_data WHERE uid=:fid")
     fun loadData(fid: Int): Flow<List<FinancialData>>
 
     // 導入資料

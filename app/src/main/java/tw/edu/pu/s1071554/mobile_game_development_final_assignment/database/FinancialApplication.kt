@@ -3,7 +3,6 @@ package tw.edu.pu.s1071554.mobile_game_development_final_assignment.database
 import android.app.Application
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
-import tw.edu.pu.s1071554.mobile_game_development_final_assignment.FinancialDatabase
 
 class FinancialApplication  : Application() {
     // No need to cancel this scope as it'll be torn down with the process

@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.room.Room
-import tw.edu.pu.s1071554.mobile_game_development_final_assignment.database.FinancialData
 
 // 主介面
 class MainActivity : AppCompatActivity() {

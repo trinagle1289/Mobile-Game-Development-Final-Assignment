@@ -1,4 +1,4 @@
-package tw.edu.pu.s1071554.mobile_game_development_final_assignment
+package tw.edu.pu.s1071554.mobile_game_development_final_assignment.database
 
 import android.content.Context
 import androidx.room.Database
@@ -7,8 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import tw.edu.pu.s1071554.mobile_game_development_final_assignment.database.FinancialData
-import tw.edu.pu.s1071554.mobile_game_development_final_assignment.database.FinancialDataDAO
 
 @Database(entities = [FinancialData::class], version = 1, exportSchema = false)
 abstract class FinancialDatabase : RoomDatabase() {
@@ -29,7 +27,7 @@ abstract class FinancialDatabase : RoomDatabase() {
                     financialDataDao.deleteAll()
 
                     // Add sample words.
-                    var d1 = FinancialData(1, "2022/06/10",100,"Hello")
+                    var d1 = FinancialData(0,"2022/06/10",100,"Hello")
                     financialDataDao.insertData(d1)
                 }
             }

@@ -42,14 +42,8 @@ class IncomeListActivity : AppCompatActivity() {
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
-        financialViewModel.allIncomeData.observe(this) { data ->
-            // Update the cached copy of the words in the adapter.
-            data.let {
-                // TODO: This may cause problems
-                if (adapter != null) {
-                    adapter.submitList(it)
-                }
-            }
+        financialViewModel.allIncomeData.observe(this){
+
         }
     }
 
@@ -85,7 +79,11 @@ class IncomeListActivity : AppCompatActivity() {
                 val time = it.data?.getStringExtra(IncomeAddActivity.EXTRA_TIME)
                 val amount = it.data?.getStringExtra(IncomeAddActivity.EXTRA_AMOUNT)
                 val description = it.data?.getStringExtra(IncomeAddActivity.EXTRA_DESCRIPTION)
-                Toast.makeText(this, time + " " + amount + " " + description, Toast.LENGTH_SHORT).show()
+                val data = amount?.let { it1 -> FinancialData(0, time, it1.toInt(), description) }
+                if (data != null) {
+                    financialViewModel.insert(data)
+                    Toast.makeText(this, "儲存成功", Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(this, "未儲存", Toast.LENGTH_SHORT).show()
             }
