@@ -80,14 +80,16 @@ class ExpenseListActivity : AppCompatActivity(), OnItemClickListener {
             if(it.resultCode == Activity.RESULT_OK){
                 val uid = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_UID,0)!!
                 val time = it.data?.getStringExtra(ExpenseAddActivity.EXTRA_TIME)
-                val amount = -1 * (it.data?.getIntExtra(ExpenseAddActivity.EXTRA_AMOUNT,0)!!)
                 val description = it.data?.getStringExtra(ExpenseAddActivity.EXTRA_DESCRIPTION)
-                val data = FinancialData(uid, time, amount, description)
 
                 if (it.data?.hasExtra(ExpenseAddActivity.EXTRA_UPDATE) == true) {
+                    val amount = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_AMOUNT,0)!!
+                    val data = FinancialData(uid, time, amount, description)
                     financialViewModel.update(data)
                     Toast.makeText(this, "更新成功", Toast.LENGTH_SHORT).show()
                 } else {
+                    val amount = -1 * (it.data?.getIntExtra(ExpenseAddActivity.EXTRA_AMOUNT,0)!!)
+                    val data = FinancialData(uid, time, amount, description)
                     financialViewModel.insert(data)
                     Toast.makeText(this, "儲存成功", Toast.LENGTH_SHORT).show()
                 }
@@ -99,6 +101,7 @@ class ExpenseListActivity : AppCompatActivity(), OnItemClickListener {
     override fun onItemClick(financialData: FinancialData?) {
         val it = Intent(this, ExpenseAddActivity::class.java)
         if (financialData != null) {
+            it.putExtra(ExpenseAddActivity.EXTRA_UPDATE, ExpenseAddActivity.EXTRA_UPDATE)
             it.putExtra(ExpenseAddActivity.EXTRA_UID, financialData.uid)
             it.putExtra(ExpenseAddActivity.EXTRA_TIME, financialData.time)
             it.putExtra(ExpenseAddActivity.EXTRA_AMOUNT, financialData.amount)
