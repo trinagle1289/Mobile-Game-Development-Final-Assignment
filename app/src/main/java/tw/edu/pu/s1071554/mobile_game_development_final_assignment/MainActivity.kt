@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.viewModels
+import tw.edu.pu.s1071554.mobile_game_development_final_assignment.database.FinancialApplication
+import tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm.FinancialViewModel
+import tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm.FinancialViewModelFactory
 
 // 主介面
 class MainActivity : AppCompatActivity() {
@@ -13,26 +17,43 @@ class MainActivity : AppCompatActivity() {
     var income: Int = 0 // 收入金額
     var expense: Int = 0 // 支出金額
 
+    private val financialViewModel: FinancialViewModel by viewModels {
+        FinancialViewModelFactory((application as FinancialApplication).repository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        // 載入資料
-//        val db = Room.databaseBuilder(
-//            applicationContext,
-//            FinancialDatabase::class.java, "financial_DB"
-//        ).build()
-//
-//        val fDao = db.financialDataDAO()
-//        val incomeData:List<FinancialData> = fDao.loadAllIncomeData()
-//        for (i in incomeData)
-//            income += i.amount
-//
-//        val expenseData: List<FinancialData> = fDao.loadAllExpenseData()
-//        for (i in expenseData)
-//            expense += i.amount
-//
-//        balance = income - expense
+        val tvBalance: TextView = findViewById(R.id.main_balance_data_text)
+        val tvIncome: TextView = findViewById(R.id.main_income_data_text)
+        val tvExpense: TextView = findViewById(R.id.main_expense_data_text)
+
+        // 載入資料
+        financialViewModel.allIncomeData.observe(this) { data ->
+            // Update the cached copy of the words in the adapter.
+            data.let {
+                income = 0
+                for (i in it)
+                    income += i.amount
+                tvIncome.text = income.toString()
+                // 餘額文字
+                balance = income + expense
+                tvBalance.text = balance.toString()
+            }
+        }
+
+        financialViewModel.allExpenseData.observe(this) { data ->
+            data.let {
+                expense = 0
+                for (i in it)
+                    expense -= i.amount
+                tvExpense.text = expense.toString()
+                // 餘額文字
+                balance = income - expense
+                tvBalance.text = balance.toString()
+            }
+        }
 
         setView()
     }
@@ -40,16 +61,6 @@ class MainActivity : AppCompatActivity() {
     // 設定畫面資料
     // 初始化UI變數
     private fun setView() {
-        // 餘額文字
-        val tvBalance: TextView = findViewById(R.id.main_balance_data_text)
-        tvBalance.text = balance.toString()
-
-        val tvIncome: TextView = findViewById(R.id.main_income_data_text)
-        tvIncome.text = income.toString()
-
-        val tvExpense: TextView = findViewById(R.id.main_expense_data_text)
-        tvExpense.text = expense.toString()
-
         // 收入金額按鈕
         val btnIncome:ImageButton = findViewById(R.id.main_income_btn)
         btnIncome.setOnClickListener {

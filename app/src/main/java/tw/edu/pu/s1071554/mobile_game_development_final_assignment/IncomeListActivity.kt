@@ -34,7 +34,6 @@ class IncomeListActivity : AppCompatActivity(), OnItemClickListener {
 
         val recyclerView = findViewById<RecyclerView>(R.id.income_list_recyclerview)
 
-        // TODO: This may cause problems
         val adapter = RecyclerViewAdapter(this)
 
         recyclerView.adapter = adapter
