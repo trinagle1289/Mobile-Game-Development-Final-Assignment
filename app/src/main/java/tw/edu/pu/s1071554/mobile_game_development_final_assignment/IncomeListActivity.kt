@@ -78,16 +78,12 @@ class IncomeListActivity : AppCompatActivity(), OnItemClickListener {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) {
             if(it.resultCode == Activity.RESULT_OK){
-                Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
-                var uid = 0;
-                if (it.data?.hasExtra(IncomeAddActivity.EXTRA_UID) == true) {
-                    uid = it.data?.getIntExtra(IncomeAddActivity.EXTRA_UID,0)!!
-                }
+                val uid = it.data?.getIntExtra(IncomeAddActivity.EXTRA_UID,0)!!
                 val time = it.data?.getStringExtra(IncomeAddActivity.EXTRA_TIME)
                 val amount = it.data?.getIntExtra(IncomeAddActivity.EXTRA_AMOUNT,0)!!
                 val description = it.data?.getStringExtra(IncomeAddActivity.EXTRA_DESCRIPTION)
                 val data = FinancialData(uid, time, amount, description)
-                Toast.makeText(this, uid.toString() + " " + time + " " + amount + " " + description, Toast.LENGTH_SHORT).show()
+
                 if (it.data?.hasExtra(IncomeAddActivity.EXTRA_UPDATE) == true) {
                     financialViewModel.update(data)
                     Toast.makeText(this, "更新成功", Toast.LENGTH_SHORT).show()

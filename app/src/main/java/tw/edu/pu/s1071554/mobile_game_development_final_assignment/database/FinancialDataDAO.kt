@@ -1,6 +1,7 @@
 package tw.edu.pu.s1071554.mobile_game_development_final_assignment.database
 
 import androidx.room.*
+import androidx.room.OnConflictStrategy.IGNORE
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -18,7 +19,7 @@ interface FinancialDataDAO {
 //    fun loadData(uid: Int): Flow<List<FinancialData>>
 
     // 導入資料
-    @Insert
+    @Insert(onConflict = IGNORE)
     suspend fun insertData(data: FinancialData)
 
     // 刪除資料
