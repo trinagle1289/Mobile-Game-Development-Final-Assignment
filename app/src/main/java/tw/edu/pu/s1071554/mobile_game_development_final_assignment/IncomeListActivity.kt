@@ -3,63 +3,62 @@ package tw.edu.pu.s1071554.mobile_game_development_final_assignment
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import tw.edu.pu.s1071554.mobile_game_development_final_assignment.database.FinancialData
+import java.text.SimpleDateFormat
+import java.util.*
 
 // 收入列表介面
 class IncomeListActivity : AppCompatActivity() {
 
-    // UI 變數
-    lateinit var tvTitle: TextView // 標題名稱
-    lateinit var btAdd: ImageButton // 新增名單
-    lateinit var btBack: ImageButton // 返回主頁面
-
-    lateinit var list: TextView
-    lateinit var dbhelp: DBHelper
-    lateinit var fdata: ArrayList<FinancialData>
-
+    lateinit var fdata: List<FinancialData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_income_list)
-
-        // 初始化
-        tvTitle = findViewById(R.id.income_list_title_text)
-        btAdd = findViewById(R.id.income_list_create_item_btn)
-        btBack = findViewById(R.id.income_list_back_gtn)
-        list = findViewById(R.id.income_list_item_list)
-
-        dbhelp = DBHelper(this)
-        fdata = ArrayList<FinancialData>()
         setView()
-        setButton()
 
+        val db = Room.databaseBuilder(
+            applicationContext,
+            FinancialDatabase::class.java, "financial_DB"
+        ).build()
+        val fDao = db.financialDataDAO()
+        fdata = fDao.loadAllIncomeData();
     }
 
     // 設定畫面資料
     private fun setView() {
-        list.text = ""
-        fdata = dbhelp.showAllIncome()
+        // 初始化UI變數
+        // 標題名稱
+        val currentDate: String = SimpleDateFormat("dd", Locale.getDefault()).format(Date())
+        val tvTitle: TextView = findViewById(R.id.income_list_title_text)
+        val title =  currentDate + "月 收入表"
+        tvTitle.text = title
 
-        var tstr: String = ""
-        for (d in fdata) {
-            tstr += "日期：" + d.time + "| 金額：" + d.amount + "\n描述：" + d.message + "\n"
-        }
-        list.setText(tstr)
-
-    }
-
-    // 設定按鈕功能
-    private fun setButton() {
+        // 新增名單
+        val btAdd: ImageButton = findViewById(R.id.income_list_create_item_btn)
         btAdd.setOnClickListener {
-            var it = Intent(this, IncomeAddActivity::class.java)
+            val it = Intent(this, IncomeAddActivity::class.java)
             startActivity(it)
         }
 
+        // 返回主頁面
+        val btBack: ImageButton = findViewById(R.id.income_list_back_gtn)
         btBack.setOnClickListener {
             finish()
         }
-    }
 
+        // 載入資料
+        val db = Room.databaseBuilder(
+            applicationContext,
+            FinancialDatabase::class.java, "financial_DB"
+        ).build()
+        val fDao = db.financialDataDAO()
+        fdata = fDao.loadAllIncomeData();
+        val list: RecyclerView = findViewById(R.id.income_list_item_list)
+        list.adapter = RecyclerViewAdapter(fdata)
+    }
 }
