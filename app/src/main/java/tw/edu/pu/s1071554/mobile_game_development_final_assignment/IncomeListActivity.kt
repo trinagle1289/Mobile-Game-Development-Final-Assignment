@@ -67,7 +67,7 @@ class IncomeListActivity : AppCompatActivity(), OnItemClickListener {
         }
 
         // 返回主頁面
-        val btBack: ImageButton = findViewById(R.id.income_list_back_gtn)
+        val btBack: ImageButton = findViewById(R.id.income_list_back_btn)
         btBack.setOnClickListener {
             finish()
         }
