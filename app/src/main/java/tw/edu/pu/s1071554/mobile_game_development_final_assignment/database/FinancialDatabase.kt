@@ -13,7 +13,7 @@ abstract class FinancialDatabase : RoomDatabase() {
 
     abstract fun financialDataDao(): FinancialDataDAO
 
-    private class WordDatabaseCallback(
+    private class FinancialDatabaseCallback(
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
@@ -50,7 +50,7 @@ abstract class FinancialDatabase : RoomDatabase() {
                     FinancialDatabase::class.java,
                     "financial_db"
                 )
-                    .addCallback(WordDatabaseCallback(scope))
+                    .addCallback(FinancialDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 // return instance

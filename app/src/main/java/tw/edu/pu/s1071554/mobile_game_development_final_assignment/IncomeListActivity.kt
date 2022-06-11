@@ -34,7 +34,7 @@ class IncomeListActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.income_list_recyclerview)
 
         // TODO: This may cause problems
-        val adapter = financialViewModel.allIncomeData.value?.let { RecyclerViewAdapter(it) }
+        val adapter = RecyclerViewAdapter()
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -42,8 +42,9 @@ class IncomeListActivity : AppCompatActivity() {
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
-        financialViewModel.allIncomeData.observe(this){
-
+        financialViewModel.allIncomeData.observe(this) { data ->
+            // Update the cached copy of the words in the adapter.
+            data.let { adapter.submitList(it) }
         }
     }
 
@@ -51,7 +52,7 @@ class IncomeListActivity : AppCompatActivity() {
     private fun setView() {
         // 初始化UI變數
         // 標題名稱
-        val currentDate: String = SimpleDateFormat("dd", Locale.getDefault()).format(Date())
+        val currentDate: String = SimpleDateFormat("MM", Locale.getDefault()).format(Date())
         val tvTitle: TextView = findViewById(R.id.income_list_title_text)
         val title =  currentDate + "月 收入表"
         tvTitle.text = title

@@ -4,51 +4,53 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import tw.edu.pu.s1071554.mobile_game_development_final_assignment.R
 import tw.edu.pu.s1071554.mobile_game_development_final_assignment.database.FinancialData
 
-class RecyclerViewAdapter (private var dataSet: List<FinancialData>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter :
+    ListAdapter<FinancialData, RecyclerViewAdapter.FinancialViewHolder>(FinancialComparator()) {
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val date: TextView
-        val amount: TextView
-        val description: TextView
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FinancialViewHolder {
+        return FinancialViewHolder.create(parent)
+    }
 
-        init {
-            // Define click listener for the ViewHolder's View.
-            date = view.findViewById(R.id.date)
-            amount = view.findViewById(R.id.amount)
-            description = view.findViewById(R.id.description)
+    override fun onBindViewHolder(holder: FinancialViewHolder, position: Int) {
+        val current = getItem(position)
+        holder.bind(current.time, current.amount, current.message)
+    }
+
+    class FinancialViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val tvTime: TextView = itemView.findViewById(R.id.date)
+        private val tvAmount: TextView = itemView.findViewById(R.id.amount)
+        private val tvMessage: TextView = itemView.findViewById(R.id.description)
+
+        fun bind(time: String?, amount: Int, message: String?) {
+            tvTime.text = time
+            tvAmount.text = amount.toString()
+            tvMessage.text = message
+        }
+
+        companion object {
+            fun create(parent: ViewGroup): FinancialViewHolder {
+                val view: View = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.recyclerview_item, parent, false)
+                return FinancialViewHolder(view)
+            }
         }
     }
 
-    // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.recyclerview_item, viewGroup, false)
+    class FinancialComparator : DiffUtil.ItemCallback<FinancialData>() {
+        override fun areItemsTheSame(oldItem: FinancialData, newItem: FinancialData): Boolean {
+            return oldItem === newItem
+        }
 
-        return ViewHolder(view)
-    }
-
-    // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        viewHolder.date.text = "日期：" +dataSet[position].time
-        viewHolder.amount.text = "金額" + dataSet[position].amount
-        viewHolder.description.text = dataSet[position].message
-    }
-
-    // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = dataSet.size
-
-    fun submitList(l: List<FinancialData>) {
-        dataSet = l;
+        override fun areContentsTheSame(oldItem: FinancialData, newItem: FinancialData): Boolean {
+            return (oldItem.time == newItem.time)
+                    &&(oldItem.amount == newItem.amount)
+                    &&(oldItem.message == newItem.message)
+        }
     }
 }
