@@ -78,14 +78,24 @@ class IncomeListActivity : AppCompatActivity(), OnItemClickListener {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) {
             if(it.resultCode == Activity.RESULT_OK){
-                val uid = it.data?.getIntExtra(IncomeAddActivity.EXTRA_UID,0)
+                var uid = 0;
+                if (it.data?.hasExtra(IncomeAddActivity.EXTRA_UID) == true) {
+                    uid = it.data?.getIntExtra(IncomeAddActivity.EXTRA_UID,0)!!
+                }
                 val time = it.data?.getStringExtra(IncomeAddActivity.EXTRA_TIME)
                 val amount = it.data?.getIntExtra(IncomeAddActivity.EXTRA_AMOUNT,0)
                 val description = it.data?.getStringExtra(IncomeAddActivity.EXTRA_DESCRIPTION)
-                val data = amount?.let { it1 -> uid?.let { it2 -> FinancialData(it2, time, it1.toInt(), description) } }
-                if (data != null) {
-                    financialViewModel.insert(data)
-                    Toast.makeText(this, "儲存成功", Toast.LENGTH_SHORT).show()
+                val data = amount?.let { it1 -> uid.let { it2 -> FinancialData(it2, time, it1, description) } }
+                if (it.data?.hasExtra(IncomeAddActivity.EXTRA_UPDATE) == true) {
+                    if (data != null) {
+                        financialViewModel.update(data)
+                        Toast.makeText(this, "更新成功", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    if (data != null) {
+                        financialViewModel.insert(data)
+                        Toast.makeText(this, "儲存成功", Toast.LENGTH_SHORT).show()
+                    }
                 }
             } else {
                 Toast.makeText(this, "未儲存", Toast.LENGTH_SHORT).show()
@@ -95,6 +105,7 @@ class IncomeListActivity : AppCompatActivity(), OnItemClickListener {
     override fun onItemClick(financialData: FinancialData?) {
         val it = Intent(this, IncomeAddActivity::class.java)
         if (financialData != null) {
+            it.putExtra(IncomeAddActivity.EXTRA_UPDATE, IncomeAddActivity.EXTRA_UPDATE)
             it.putExtra(IncomeAddActivity.EXTRA_UID, financialData.uid)
             it.putExtra(IncomeAddActivity.EXTRA_TIME, financialData.time)
             it.putExtra(IncomeAddActivity.EXTRA_AMOUNT, financialData.amount)

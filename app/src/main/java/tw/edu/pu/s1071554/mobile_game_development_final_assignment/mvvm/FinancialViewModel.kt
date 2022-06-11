@@ -25,6 +25,10 @@ class FinancialViewModel(private val repository: DataRepository) : ViewModel() {
         repository.insert(financialData)
     }
 
+    fun update(financialData: FinancialData) = viewModelScope.launch {
+        repository.update(financialData)
+    }
+
     fun delete(financialData: FinancialData) = viewModelScope.launch {
         repository.delete(financialData)
     }
