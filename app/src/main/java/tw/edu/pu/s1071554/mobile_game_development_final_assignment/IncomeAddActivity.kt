@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,8 +42,6 @@ class IncomeAddActivity : AppCompatActivity() {
         val replyIntent = Intent()
         val btAdd: ImageButton = findViewById(R.id.income_create_add_btn)
         btAdd.setOnClickListener {
-            Toast.makeText(this, "press", Toast.LENGTH_SHORT).show()
-
             if(TextUtils.isEmpty(etIncome.text)) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
