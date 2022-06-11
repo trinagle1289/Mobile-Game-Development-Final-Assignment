@@ -59,6 +59,7 @@ class ExpenseAddActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val EXTRA_UID = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.UID";
         const val EXTRA_TIME = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.TIME";
         const val EXTRA_AMOUNT = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.AMOUNT";
         const val EXTRA_DESCRIPTION = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.DESCRIPTION";

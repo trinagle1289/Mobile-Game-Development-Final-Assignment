@@ -18,7 +18,7 @@ interface FinancialDataDAO {
     fun loadData(fid: Int): Flow<List<FinancialData>>
 
     // 導入資料
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertData(data: FinancialData)
 
     // 刪除資料

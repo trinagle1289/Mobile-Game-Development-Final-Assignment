@@ -15,12 +15,13 @@ import tw.edu.pu.s1071554.mobile_game_development_final_assignment.database.Fina
 import tw.edu.pu.s1071554.mobile_game_development_final_assignment.database.FinancialData
 import tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm.FinancialViewModel
 import tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm.FinancialViewModelFactory
+import tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm.OnItemClickListener
 import tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm.RecyclerViewAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
 // 收入列表介面
-class IncomeListActivity : AppCompatActivity() {
+class IncomeListActivity : AppCompatActivity(), OnItemClickListener {
 
     private val financialViewModel: FinancialViewModel by viewModels {
         FinancialViewModelFactory((application as FinancialApplication).repository)
@@ -34,7 +35,7 @@ class IncomeListActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.income_list_recyclerview)
 
         // TODO: This may cause problems
-        val adapter = RecyclerViewAdapter()
+        val adapter = RecyclerViewAdapter(this)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -89,4 +90,15 @@ class IncomeListActivity : AppCompatActivity() {
                 Toast.makeText(this, "未儲存", Toast.LENGTH_SHORT).show()
             }
         }
+
+    override fun onItemClick(financialData: FinancialData?) {
+        val it = Intent(this, IncomeAddActivity::class.java)
+        if (financialData != null) {
+            it.putExtra(IncomeAddActivity.EXTRA_UID, financialData.uid)
+            it.putExtra(IncomeAddActivity.EXTRA_TIME, financialData.time)
+            it.putExtra(IncomeAddActivity.EXTRA_AMOUNT, financialData.amount)
+            it.putExtra(IncomeAddActivity.EXTRA_DESCRIPTION, financialData.message)
+        }
+        getResult.launch(it)
+    }
 }
