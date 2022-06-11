@@ -24,6 +24,12 @@ class DataRepository(private val financialDataDAO: FinancialDataDAO) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
+    suspend fun update(financialData: FinancialData) {
+        financialDataDAO.updateData(financialData)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
     suspend fun delete(financialData: FinancialData) {
         financialDataDAO.delete(financialData)
     }

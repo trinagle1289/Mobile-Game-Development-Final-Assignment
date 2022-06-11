@@ -25,6 +25,10 @@ interface FinancialDataDAO {
     @Delete
     fun delete(data: FinancialData)
 
+    // 更新資料
+    @Update
+    suspend fun updateData(data: FinancialData)
+
     @Query("DELETE FROM financial_data")
     suspend fun deleteAll()
 }

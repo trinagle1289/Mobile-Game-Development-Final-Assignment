@@ -78,10 +78,11 @@ class IncomeListActivity : AppCompatActivity(), OnItemClickListener {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) {
             if(it.resultCode == Activity.RESULT_OK){
+                val uid = it.data?.getIntExtra(IncomeAddActivity.EXTRA_UID,0)
                 val time = it.data?.getStringExtra(IncomeAddActivity.EXTRA_TIME)
-                val amount = it.data?.getStringExtra(IncomeAddActivity.EXTRA_AMOUNT)
+                val amount = it.data?.getIntExtra(IncomeAddActivity.EXTRA_AMOUNT,0)
                 val description = it.data?.getStringExtra(IncomeAddActivity.EXTRA_DESCRIPTION)
-                val data = amount?.let { it1 -> FinancialData(0, time, it1.toInt(), description) }
+                val data = amount?.let { it1 -> uid?.let { it2 -> FinancialData(it2, time, it1.toInt(), description) } }
                 if (data != null) {
                     financialViewModel.insert(data)
                     Toast.makeText(this, "儲存成功", Toast.LENGTH_SHORT).show()
