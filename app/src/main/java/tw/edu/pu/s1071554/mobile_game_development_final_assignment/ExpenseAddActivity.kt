@@ -41,7 +41,7 @@ class ExpenseAddActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
                 val time = etTime.text.toString()
-                val amount = etExpense.text.toString().toInt() * -1
+                val amount = etExpense.text.toString().toInt()
                 val description = etDescribe.text.toString()
                 if (edit)
                     replyIntent.putExtra(EXTRA_UPDATE, EXTRA_UPDATE)

@@ -78,12 +78,16 @@ class ExpenseListActivity : AppCompatActivity(), OnItemClickListener {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) {
             if(it.resultCode == Activity.RESULT_OK){
-                val uid = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_UID,0)
+                val uid = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_UID,0)!!
                 val time = it.data?.getStringExtra(ExpenseAddActivity.EXTRA_TIME)
-                val amount = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_AMOUNT,0)
+                val amount = -1 * (it.data?.getIntExtra(ExpenseAddActivity.EXTRA_AMOUNT,0)!!)
                 val description = it.data?.getStringExtra(ExpenseAddActivity.EXTRA_DESCRIPTION)
-                val data = amount?.let { it1 -> uid?.let { it2 -> FinancialData(it2, time, it1.toInt(), description) } }
-                if (data != null) {
+                val data = FinancialData(uid, time, amount, description)
+
+                if (it.data?.hasExtra(ExpenseAddActivity.EXTRA_UPDATE) == true) {
+                    financialViewModel.update(data)
+                    Toast.makeText(this, "更新成功", Toast.LENGTH_SHORT).show()
+                } else {
                     financialViewModel.insert(data)
                     Toast.makeText(this, "儲存成功", Toast.LENGTH_SHORT).show()
                 }
