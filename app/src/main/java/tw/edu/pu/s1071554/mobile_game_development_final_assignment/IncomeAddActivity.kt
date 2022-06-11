@@ -1,74 +1,95 @@
 package tw.edu.pu.s1071554.mobile_game_development_final_assignment
 
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageButton
-import java.lang.Exception
+import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 // 新增收入界面
 class IncomeAddActivity : AppCompatActivity() {
-
-    // UI 變數
-    lateinit var etTime: EditText // 時間文字
-    lateinit var etIncome: EditText // 輸入收入金額
-    lateinit var etDescribe: EditText // 輸入描述文字
-
-    lateinit var btAdd: ImageButton // 新增按鈕
-    lateinit var btBack: ImageButton // 返回按鈕
-
-    lateinit var dbhelp: DBHelper
-    lateinit var fdata: ArrayList<FinancialData>
-
+    private var uid = 0
+    private var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_income_add)
 
-        // 初始化參數
-        etTime = findViewById(R.id.income_create_time_data)
-        etIncome = findViewById(R.id.income_create_income_data)
-        etDescribe = findViewById(R.id.income_create_describe_data)
-        btAdd = findViewById(R.id.income_create_add_btn)
-        btBack = findViewById(R.id.income_create_back_btn)
+        // 時間文字
+        val etTime: EditText = findViewById(R.id.income_create_time_data)
 
-        dbhelp = DBHelper(this)
-        fdata = ArrayList<FinancialData>()
+        // 輸入收入金額
+        val etIncome: EditText = findViewById(R.id.income_create_income_data)
+        // 輸入描述文字
+        val etDescribe:EditText = findViewById(R.id.income_create_describe_data)
 
-        setView()
-        setButton()
+        // 返回按鈕
+        val btBack: ImageButton = findViewById(R.id.income_create_back_btn)
+        btBack.setOnClickListener {
+            finish()
+        }
 
-
-    }
-
-    // 設定畫面資料
-    private fun setView() {
-        etTime.text.clear()
-        etIncome.text.clear()
-        etDescribe.text.clear()
-    }
-
-    // 設定按鈕功能
-    private fun setButton() {
+        // 新增按鈕
+        val replyIntent = Intent()
+        val btAdd: ImageButton = findViewById(R.id.income_create_add_btn)
         btAdd.setOnClickListener {
-            var data = FinancialData(
-                0,
-                etTime.text.toString(),
-                etIncome.text.toString(),
-                etDescribe.text.toString()
-            )
-            try {
-                dbhelp.insertIncomeData(data)
-            } catch (e: Exception) {
-                e.printStackTrace()
+            if(TextUtils.isEmpty(etIncome.text)) {
+                setResult(Activity.RESULT_CANCELED, replyIntent)
+            } else {
+                val time = etTime.text.toString()
+                val amount = etIncome.text.toString().toInt()
+                val description = etDescribe.text.toString()
+                if (edit)
+                    replyIntent.putExtra(EXTRA_UPDATE, EXTRA_UPDATE)
+                replyIntent.putExtra(EXTRA_UID, uid)
+                replyIntent.putExtra(EXTRA_TIME, time)
+                replyIntent.putExtra(EXTRA_AMOUNT, amount)
+                replyIntent.putExtra(EXTRA_DESCRIPTION, description)
+                setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
         }
 
-        btBack.setOnClickListener {
-            finish()
+        // get data comes from main activity.
+        if (intent.hasExtra(EXTRA_UPDATE)) {
+            edit = true
+        }
+
+        val intent = intent
+        if (intent.hasExtra(EXTRA_UID)) {
+            uid = intent.getIntExtra(EXTRA_UID, 0)
+        }
+
+        if (intent.hasExtra(EXTRA_TIME)) {
+            val txt = intent.getStringExtra(EXTRA_TIME).toString()
+            etTime.setText(txt)
+        } else {
+            val currentDate: String =
+                SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
+            etTime.setText(currentDate)
+        }
+
+        if (intent.hasExtra(EXTRA_AMOUNT)) {
+            val amount = intent.getIntExtra(EXTRA_AMOUNT, 0)
+            if (amount != 0)
+                etIncome.setText(amount.toString())
+        }
+
+        if (intent.hasExtra(EXTRA_DESCRIPTION)) {
+            val msg = intent.getStringExtra(EXTRA_DESCRIPTION).toString()
+            etDescribe.setText(msg)
         }
     }
 
+    companion object {
+        const val EXTRA_UPDATE = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.UPDATE";
+        const val EXTRA_UID = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.UID";
+        const val EXTRA_TIME = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.TIME";
+        const val EXTRA_AMOUNT = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.AMOUNT";
+        const val EXTRA_DESCRIPTION = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.DESCRIPTION";
+    }
 }
