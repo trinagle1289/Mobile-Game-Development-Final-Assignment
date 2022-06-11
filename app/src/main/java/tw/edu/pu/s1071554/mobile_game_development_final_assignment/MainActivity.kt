@@ -47,8 +47,8 @@ class MainActivity : AppCompatActivity() {
             data.let {
                 expense = 0
                 for (i in it)
-                    expense -= i.amount
-                tvExpense.text = expense.toString()
+                    expense += i.amount
+                tvExpense.text = (-1 * expense).toString()
                 // 餘額文字
                 balance = income + expense
                 tvBalance.text = balance.toString()
