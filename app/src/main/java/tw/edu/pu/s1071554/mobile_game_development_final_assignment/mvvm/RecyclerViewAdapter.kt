@@ -1,14 +1,16 @@
-package tw.edu.pu.s1071554.mobile_game_development_final_assignment
+package tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import tw.edu.pu.s1071554.mobile_game_development_final_assignment.R
 import tw.edu.pu.s1071554.mobile_game_development_final_assignment.database.FinancialData
 
-class RecyclerViewAdapter (private val dataSet: List<FinancialData>) :
-    RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter (private var dataSet: List<FinancialData>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using
@@ -38,7 +40,6 @@ class RecyclerViewAdapter (private val dataSet: List<FinancialData>) :
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.date.text = "日期：" +dataSet[position].time
@@ -48,4 +49,8 @@ class RecyclerViewAdapter (private val dataSet: List<FinancialData>) :
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
+
+    fun submitList(l: List<FinancialData>) {
+        dataSet = l;
+    }
 }

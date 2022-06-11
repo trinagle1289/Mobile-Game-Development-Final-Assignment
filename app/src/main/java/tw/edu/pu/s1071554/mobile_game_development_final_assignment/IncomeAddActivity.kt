@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 // 新增收入界面
 class IncomeAddActivity : AppCompatActivity() {
@@ -43,17 +43,17 @@ class IncomeAddActivity : AppCompatActivity() {
         val replyIntent = Intent()
         val btAdd: ImageButton = findViewById(R.id.income_create_add_btn)
         btAdd.setOnClickListener {
+            Toast.makeText(this, "press", Toast.LENGTH_SHORT).show()
+
             if(TextUtils.isEmpty(etIncome.text)) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
                 val time = etTime.text.toString()
                 val amount = etIncome.text.toString()
                 val description = etDescribe.text.toString()
-                val dataArray = ArrayList<String>()
-                dataArray.add(time)
-                dataArray.add(amount)
-                dataArray.add(description)
-                replyIntent.putExtra(EXTRA_REPLY, dataArray.toTypedArray())
+                replyIntent.putExtra(EXTRA_TIME, time)
+                replyIntent.putExtra(EXTRA_AMOUNT, amount)
+                replyIntent.putExtra(EXTRA_DESCRIPTION, description)
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
@@ -61,6 +61,8 @@ class IncomeAddActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_REPLY = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.REPLY"
+        const val EXTRA_TIME = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.TIME";
+        const val EXTRA_AMOUNT = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.AMOUNT";
+        const val EXTRA_DESCRIPTION = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.DESCRIPTION";
     }
 }
