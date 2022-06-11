@@ -19,22 +19,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 載入資料
-        val db = Room.databaseBuilder(
-            applicationContext,
-            FinancialDatabase::class.java, "financial_DB"
-        ).build()
-
-        val fDao = db.financialDataDAO()
-        val incomeData:List<FinancialData> = fDao.loadAllIncomeData()
-        for (i in incomeData)
-            income += i.amount
-
-        val expenseData: List<FinancialData> = fDao.loadAllExpenseData()
-        for (i in expenseData)
-            expense += i.amount
-
-        balance = income - expense
+//        // 載入資料
+//        val db = Room.databaseBuilder(
+//            applicationContext,
+//            FinancialDatabase::class.java, "financial_DB"
+//        ).build()
+//
+//        val fDao = db.financialDataDAO()
+//        val incomeData:List<FinancialData> = fDao.loadAllIncomeData()
+//        for (i in incomeData)
+//            income += i.amount
+//
+//        val expenseData: List<FinancialData> = fDao.loadAllExpenseData()
+//        for (i in expenseData)
+//            expense += i.amount
+//
+//        balance = income - expense
 
         setView()
     }

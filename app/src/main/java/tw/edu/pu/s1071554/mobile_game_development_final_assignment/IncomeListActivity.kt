@@ -21,12 +21,12 @@ class IncomeListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_income_list)
         setView()
 
-        val db = Room.databaseBuilder(
-            applicationContext,
-            FinancialDatabase::class.java, "financial_DB"
-        ).build()
-        val fDao = db.financialDataDAO()
-        fdata = fDao.loadAllIncomeData();
+//        val db = Room.databaseBuilder(
+//            applicationContext,
+//            FinancialDatabase::class.java, "financial_DB"
+//        ).build()
+//        val fDao = db.financialDataDAO()
+//        fdata = fDao.loadAllIncomeData();
     }
 
     // 設定畫面資料
@@ -51,14 +51,14 @@ class IncomeListActivity : AppCompatActivity() {
             finish()
         }
 
-        // 載入資料
-        val db = Room.databaseBuilder(
-            applicationContext,
-            FinancialDatabase::class.java, "financial_DB"
-        ).build()
-        val fDao = db.financialDataDAO()
-        fdata = fDao.loadAllIncomeData();
-        val list: RecyclerView = findViewById(R.id.income_list_item_list)
-        list.adapter = RecyclerViewAdapter(fdata)
+//        // 載入資料
+//        val db = Room.databaseBuilder(
+//            applicationContext,
+//            FinancialDatabase::class.java, "financial_DB"
+//        ).build()
+//        val fDao = db.financialDataDAO()
+//        fdata = fDao.loadAllIncomeData();
+//        val list: RecyclerView = findViewById(R.id.income_list_item_list)
+//        list.adapter = RecyclerViewAdapter(fdata)
     }
 }
