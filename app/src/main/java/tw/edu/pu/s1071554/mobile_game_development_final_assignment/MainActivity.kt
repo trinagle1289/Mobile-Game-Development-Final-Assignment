@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     expense -= i.amount
                 tvExpense.text = expense.toString()
                 // 餘額文字
-                balance = income - expense
+                balance = income + expense
                 tvBalance.text = balance.toString()
             }
         }
