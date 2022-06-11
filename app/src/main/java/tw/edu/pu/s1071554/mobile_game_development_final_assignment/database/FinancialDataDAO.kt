@@ -14,6 +14,10 @@ interface FinancialDataDAO {
     @Query("SELECT * FROM financial_data WHERE AMOUNT < 0")
     fun loadAllExpenseData(): Flow<List<FinancialData>>
 
+    // 取得資料
+    @Query("SELECT * FROM financial_data WHERE UID=:fid")
+    fun loadData(fid: Int): Flow<List<FinancialData>>
+
     // 導入資料
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertData(data: FinancialData)
