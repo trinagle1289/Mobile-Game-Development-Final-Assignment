@@ -7,7 +7,7 @@
     tools:context=".ExpenseListActivity">
 
     <TextView
-        android:id="@+id/expanse_list_title_text"
+        android:id="@+id/expense_list_title_text"
         android:layout_width="236dp"
         android:layout_height="64dp"
         android:layout_marginStart="84dp"
@@ -17,17 +17,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/expanse_list_item_list"
-        android:layout_width="292dp"
-        android:layout_height="549dp"
-        android:layout_marginBottom="76dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/expense_list_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="64dp"
+        tools:listitem="@layout/recyclerview_item"
+        app:layout_constraintBottom_toTopOf="@+id/expense_list_add_item_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expense_list_title_text" />
 
     <ImageButton
-        android:id="@+id/expanse_list_back_btn"
+        android:id="@+id/expense_list_back_btn"
         android:layout_width="64dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
@@ -39,7 +42,7 @@
         app:srcCompat="@drawable/back_btn" />
 
     <ImageButton
-        android:id="@+id/expanse_list_add_item_btn"
+        android:id="@+id/expense_list_add_item_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="156dp"
