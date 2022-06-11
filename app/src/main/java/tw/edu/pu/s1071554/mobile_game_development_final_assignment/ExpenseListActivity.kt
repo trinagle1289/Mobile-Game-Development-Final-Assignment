@@ -17,6 +17,7 @@ import tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm.Financia
 import tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm.FinancialViewModelFactory
 import tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm.OnItemClickListener
 import tw.edu.pu.s1071554.mobile_game_development_final_assignment.mvvm.RecyclerViewAdapter
+import java.lang.Math.abs
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -81,15 +82,12 @@ class ExpenseListActivity : AppCompatActivity(), OnItemClickListener {
                 val uid = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_UID,0)!!
                 val time = it.data?.getStringExtra(ExpenseAddActivity.EXTRA_TIME)
                 val description = it.data?.getStringExtra(ExpenseAddActivity.EXTRA_DESCRIPTION)
-
+                val amount = -1 * abs(it.data?.getIntExtra(ExpenseAddActivity.EXTRA_AMOUNT,0)!!)
+                val data = FinancialData(uid, time, amount, description)
                 if (it.data?.hasExtra(ExpenseAddActivity.EXTRA_UPDATE) == true) {
-                    val amount = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_AMOUNT,0)!!
-                    val data = FinancialData(uid, time, amount, description)
                     financialViewModel.update(data)
                     Toast.makeText(this, "更新成功", Toast.LENGTH_SHORT).show()
                 } else {
-                    val amount = -1 * (it.data?.getIntExtra(ExpenseAddActivity.EXTRA_AMOUNT,0)!!)
-                    val data = FinancialData(uid, time, amount, description)
                     financialViewModel.insert(data)
                     Toast.makeText(this, "儲存成功", Toast.LENGTH_SHORT).show()
                 }
