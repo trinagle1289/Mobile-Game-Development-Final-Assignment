@@ -12,26 +12,20 @@ import java.util.*
 
 // 新增支出界面
 class ExpenseAddActivity : AppCompatActivity() {
+    private var uid = 0
 
-    // UI 變數
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expense_add)
-        setView()
-    }
 
-    // 初始化UI變數
-    private fun setView() {
+
         // 時間文字
         val etTime: EditText = findViewById(R.id.expense_create_time_data)
-        val currentDate: String = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
-        etTime.setText(currentDate)
 
         // 輸入收入金額
         val etExpense: EditText = findViewById(R.id.expense_create_expense_data)
-
         // 輸入描述文字
-        val etDescribe: EditText = findViewById(R.id.expense_create_describe_data)
+        val etDescribe:EditText = findViewById(R.id.expense_create_describe_data)
 
         // 返回按鈕
         val btBack: ImageButton = findViewById(R.id.expense_create_back_btn)
@@ -49,12 +43,39 @@ class ExpenseAddActivity : AppCompatActivity() {
                 val time = etTime.text.toString()
                 val amount = etExpense.text.toString()
                 val description = etDescribe.text.toString()
+                replyIntent.putExtra(EXTRA_UID, uid)
                 replyIntent.putExtra(EXTRA_TIME, time)
                 replyIntent.putExtra(EXTRA_AMOUNT, amount)
                 replyIntent.putExtra(EXTRA_DESCRIPTION, description)
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
+        }
+
+        // get data comes from main activity.
+        val intent = intent
+        if (intent.hasExtra(EXTRA_UID)) {
+            uid = intent.getIntExtra(EXTRA_UID, 0)
+        }
+
+        if (intent.hasExtra(EXTRA_TIME)) {
+            val txt = intent.getStringExtra(EXTRA_TIME).toString()
+            etTime.setText(txt)
+        } else {
+            val currentDate: String =
+                SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
+            etTime.setText(currentDate)
+        }
+
+        if (intent.hasExtra(EXTRA_AMOUNT)) {
+            val amount = intent.getIntExtra(EXTRA_AMOUNT, 0)
+            if (amount != 0)
+                etExpense.setText(amount.toString())
+        }
+
+        if (intent.hasExtra(EXTRA_DESCRIPTION)) {
+            val msg = intent.getStringExtra(EXTRA_DESCRIPTION).toString()
+            etDescribe.setText(msg)
         }
     }
 
@@ -64,5 +85,4 @@ class ExpenseAddActivity : AppCompatActivity() {
         const val EXTRA_AMOUNT = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.AMOUNT";
         const val EXTRA_DESCRIPTION = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.DESCRIPTION";
     }
-
 }
