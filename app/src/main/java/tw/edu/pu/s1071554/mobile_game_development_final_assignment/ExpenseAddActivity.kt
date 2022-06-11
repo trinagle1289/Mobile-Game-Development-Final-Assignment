@@ -13,11 +13,11 @@ import java.util.*
 // 新增支出界面
 class ExpenseAddActivity : AppCompatActivity() {
     private var uid = 0
+    private var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expense_add)
-
 
         // 時間文字
         val etTime: EditText = findViewById(R.id.expense_create_time_data)
@@ -41,8 +41,10 @@ class ExpenseAddActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
                 val time = etTime.text.toString()
-                val amount = etExpense.text.toString()
+                val amount = etExpense.text.toString().toInt() * -1
                 val description = etDescribe.text.toString()
+                if (edit)
+                    replyIntent.putExtra(EXTRA_UPDATE, EXTRA_UPDATE)
                 replyIntent.putExtra(EXTRA_UID, uid)
                 replyIntent.putExtra(EXTRA_TIME, time)
                 replyIntent.putExtra(EXTRA_AMOUNT, amount)
@@ -53,6 +55,10 @@ class ExpenseAddActivity : AppCompatActivity() {
         }
 
         // get data comes from main activity.
+        if (intent.hasExtra(EXTRA_UPDATE)) {
+            edit = true
+        }
+
         val intent = intent
         if (intent.hasExtra(EXTRA_UID)) {
             uid = intent.getIntExtra(EXTRA_UID, 0)
@@ -80,6 +86,7 @@ class ExpenseAddActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val EXTRA_UPDATE = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.UPDATE";
         const val EXTRA_UID = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.UID";
         const val EXTRA_TIME = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.TIME";
         const val EXTRA_AMOUNT = "tw.edu.pu.s1071554.mobile_game_development_final_assignment.AMOUNT";

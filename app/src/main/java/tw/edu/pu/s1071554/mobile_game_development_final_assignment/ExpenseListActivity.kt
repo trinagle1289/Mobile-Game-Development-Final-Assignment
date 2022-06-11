@@ -55,7 +55,7 @@ class ExpenseListActivity : AppCompatActivity(), OnItemClickListener {
         // 標題名稱
         val currentDate: String = SimpleDateFormat("MM", Locale.getDefault()).format(Date())
         val tvTitle: TextView = findViewById(R.id.expense_list_title_text)
-        val title = currentDate + "月 收入表"
+        val title =  currentDate + "月 支出表"
         tvTitle.text = title
 
         // 新增名單
@@ -76,23 +76,13 @@ class ExpenseListActivity : AppCompatActivity(), OnItemClickListener {
     // Receiver
     private val getResult =
         registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                val uid = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_UID, 0)
+            ActivityResultContracts.StartActivityForResult()) {
+            if(it.resultCode == Activity.RESULT_OK){
+                val uid = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_UID,0)
                 val time = it.data?.getStringExtra(ExpenseAddActivity.EXTRA_TIME)
-                val amount = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_AMOUNT, 0)
+                val amount = it.data?.getIntExtra(ExpenseAddActivity.EXTRA_AMOUNT,0)
                 val description = it.data?.getStringExtra(ExpenseAddActivity.EXTRA_DESCRIPTION)
-                val data = amount?.let { it1 ->
-                    uid?.let { it2 ->
-                        FinancialData(
-                            it2,
-                            time,
-                            it1.toInt(),
-                            description
-                        )
-                    }
-                }
+                val data = amount?.let { it1 -> uid?.let { it2 -> FinancialData(it2, time, it1.toInt(), description) } }
                 if (data != null) {
                     financialViewModel.insert(data)
                     Toast.makeText(this, "儲存成功", Toast.LENGTH_SHORT).show()
@@ -112,5 +102,5 @@ class ExpenseListActivity : AppCompatActivity(), OnItemClickListener {
         }
         getResult.launch(it)
     }
-
 }
+
